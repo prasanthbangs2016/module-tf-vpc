@@ -5,6 +5,6 @@ resource "aws_subnet" "main" {
   availability_zone_id = var.AZ[count.index]
 
   tags = {
-    Name = "Roboshop-${var.name}-snet-${var.AZ}[count.index]"
+    Name = "Roboshop-${var.name}-snet,var.AZ[count.index]"
   }
 }
