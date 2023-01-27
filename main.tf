@@ -12,5 +12,6 @@ module "subnets" {
   name = each.value["name"]
   subnets = each.value["subnet_cidr"]
   vpc_id = aws_vpc.main.id
+  AZ = var.AZ
 
 }
