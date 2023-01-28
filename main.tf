@@ -21,6 +21,15 @@ module "subnets" {
   //route_table = aws_route_table.route-tables
 }
 
+module "routes" {
+  for_each = var.subnets
+  source   = "./routes"
+  vpc_id   = aws_vpc.main.id
+  name = each.value["name"]
+
+
+}
+
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
