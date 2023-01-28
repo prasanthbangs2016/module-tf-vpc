@@ -7,7 +7,7 @@ resource "aws_route_table" "route-tables" {
   }
 }
 
-resource "aws_route_table_association" "public" {
+resource "aws_route_table_association" "assoc" {
   count = length(var.subnet_ids[var.name].out[*].id)
   subnet_id      = element(var.subnet_ids[var.name].out[*].id, count.index )
   route_table_id = aws_route_table.route-tables.id
