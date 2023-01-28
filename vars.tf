@@ -4,5 +4,3 @@ variable "subnets" {}
 
 variable "env" {}
 variable "AZ" {}
-
-variable "vpc_id" {}
