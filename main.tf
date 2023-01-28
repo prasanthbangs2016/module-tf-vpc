@@ -15,9 +15,9 @@ module "subnets" {
   AZ       = var.AZ
   env      = "var.env"
   ngw      = try(each.value["ngw"], false)
-  igw      = try(each.value["igw"], false)
-  igw_id   = aws_internet_gateway.igw.id
-  route_table = aws_route_table.route-tables
+  //igw      = try(each.value["igw"], false)
+  //igw_id   = aws_internet_gateway.igw.id
+  //route_table = aws_route_table.route-tables
 }
 
 
