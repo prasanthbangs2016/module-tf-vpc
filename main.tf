@@ -40,8 +40,18 @@ resource "aws_route_table" "route-tables" {
 
   }
 }
-
+#way to create route table in general, it create multiple rt for all 3
+#resource "aws_route" "public" {
+#  route_table_id = aws_route_table.route-tables["public"].id
+#  destination_cidr_block = "0.0.0.0/0"
+#  gateway_id = aws_internet_gateway.igw.id
+#}
+#
+#output "out" {
+#  value = aws_route_table.route-tables
+#  value = aws_route_table.route-tables["public"].id
+#}
 
 output "out" {
-  value = aws_route_table.route-tables["public"].id
+  value = module.subnets.out
 }
