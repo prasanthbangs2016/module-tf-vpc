@@ -11,7 +11,7 @@ module "subnets" {
   source   = "./subnets"
   name     = each.value["name"]
   subnets  = each.value["subnet_cidr"]
-  vpc_id   = var.vpc_id
+  vpc_id   = aws_vpc.main.id
   AZ       = var.AZ
   env      = "var.env"
   ngw      = try(each.value["ngw"], false)
