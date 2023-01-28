@@ -18,12 +18,11 @@ module "subnets" {
   igw      = try(each.value["igw"], false)
 }
 
-resource "aws_internet_gateway" "igw" {
-        vpc_id = var.vpc_id
 
-        tags = {
-          Name = "Roboshop-${var.env}-igw"
-        }
-      }
+resource "aws_internet_gateway" "gw" {
+  vpc_id = var.vpc_id
 
-
+  tags = {
+    Name = "Roboshop-${var.env}-igw"
+  }
+}
