@@ -61,3 +61,18 @@ resource "aws_route_table_association" "public" {
   subnet_id      = element(module.subnets["public"].out[*].id, count.index )
   route_table_id = aws_route_table.route-tables["public"].id
 }
+
+#eip is needed for nat gateway
+resource "aws_eip" "ngw" {
+  vpc      = true
+}
+
+resource "aws_nat_gateway" "example" {
+  allocation_id = aws_eip.ngw.id
+  subnet_id     = module.subnets["public"].out[*].id[0]
+
+  tags = {
+    Name = "gw NAT"
+  }
+  
+}
