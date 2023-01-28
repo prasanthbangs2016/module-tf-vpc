@@ -53,5 +53,5 @@ resource "aws_route_table" "route-tables" {
 #}
 
 output "out" {
-  value = module.subnets["public"].out[0].id
+  value = module.subnets["public"].out[*].id
 }
