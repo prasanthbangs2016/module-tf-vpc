@@ -8,6 +8,6 @@ variable "AZ" {}
 
 variable "ngw" {}
 
-variable "igw" {}
+#variable "igw" {}
 
 variable "env" {}
