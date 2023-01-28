@@ -8,3 +8,4 @@ resource "aws_subnet" "main" {
     Name = "Roboshop-${var.name}-snet"
   }
 }
+
