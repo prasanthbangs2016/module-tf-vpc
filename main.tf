@@ -69,10 +69,10 @@ resource "aws_eip" "ngw" {
 
 resource "aws_nat_gateway" "example" {
   allocation_id = aws_eip.ngw.id
-  subnet_id     = module.subnets["public"].out[*].id[0]
+  subnet_id     = module.subnets["public"].out[0].id
 
   tags = {
     Name = "gw NAT"
   }
-  
+
 }
