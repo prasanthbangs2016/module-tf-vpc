@@ -16,6 +16,8 @@ module "subnets" {
   env      = "var.env"
   ngw      = try(each.value["ngw"], false)
   igw      = try(each.value["igw"], false)
+  igw_id   = aws_internet_gateway.igw.id
+  route_table = aws_route_table.route-tables
 }
 
 
@@ -26,4 +28,20 @@ resource "aws_internet_gateway" "igw" {
   tags = {
     Name = "Roboshop-${var.env}-igw"
   }
+}
+
+
+resource "aws_route_table" "route-tables" {
+  for_each = var.subnets
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "Roboshop-Dev-${each.value["name"]}-rt"
+
+  }
+}
+
+
+output "out" {
+  value = aws_route_table.route-tables
 }
