@@ -1,16 +1,17 @@
 resource "aws_subnet" "main" {
-  count = length(var.subnets)
-  vpc_id     = var.vpc_id
-  cidr_block = var.subnets[count.index]
+  count             = length(var.subnets)
+  vpc_id            = var.vpc_id
+  cidr_block        = var.subnets[count.index]
   availability_zone = var.AZ[count.index]
 
   tags = {
-    Name = "Roboshop-${var.name}-snet"
+    Name = "${var.name}-subnet"
   }
-}
 
-output "out" {
-  value = aws_subnet.main
+  lifecycle {
+    ignore_changes = [tags]
+  }
+
 }
 
 output "subnets" {
