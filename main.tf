@@ -15,9 +15,9 @@ module "subnets" {
   vpc_id   = aws_vpc.main.id
   AZ       = var.AZ
   env      = "var.env"
-  ngw      = try(each.value["ngw"], false)
+  //ngw      = try(each.value["ngw"], false)
   //igw      = try(each.value["igw"], false)
-  #igw_id   = aws_internet_gateway.igw.id
+  //igw_id   = aws_internet_gateway.igw.id
   //route_table = aws_route_table.route-tables
 }
 
@@ -27,6 +27,11 @@ module "routes" {
   vpc_id   = aws_vpc.main.id
   name = each.value["name"]
   subnet_ids = module.subnets
+  gateway_id = aws_internet_gateway.igw.id
+  nat_gateway_id = aws_nat_gateway.ngw.id
+  ngw      = try(each.value["ngw"], false)
+  igw      = try(each.value["igw"], false)
+
 
 
 }
@@ -108,18 +113,18 @@ resource "aws_internet_gateway" "igw" {
 #
 #
 #
-##eip is needed for nat gateway
-#resource "aws_eip" "ngw" {
-#  vpc      = true
-#}
-#
-#resource "aws_nat_gateway" "ngw" {
-#  allocation_id = aws_eip.ngw.id
-#  subnet_id     = module.subnets["public"].out[0].id
-#
-#  tags = {
-#    Name = "gw NAT"
-#  }
+#eip is needed for nat gateway
+resource "aws_eip" "ngw" {
+  vpc      = true
+}
+
+resource "aws_nat_gateway" "ngw" {
+  allocation_id = aws_eip.ngw.id
+  subnet_id     = module.subnets["public"].out[0].id
+
+  tags = {
+    Name = "gw NAT"
+  }
 #
 #
 #}
