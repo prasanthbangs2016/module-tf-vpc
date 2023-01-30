@@ -32,8 +32,6 @@ module "routes" {
   ngw      = try(each.value["ngw"], false)
   igw      = try(each.value["igw"], false)
 
-
-
 }
 
 output "out" {
