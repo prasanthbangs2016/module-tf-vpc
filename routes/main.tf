@@ -23,7 +23,7 @@ resource "aws_route" "public" {
 
 resource "aws_route" "private" {
   count = var.name == var.ngw ? 1 :0
-  route_table_id = aws_route_table.route-tables["public"].id
+  route_table_id = aws_route_table.route-tables.id
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id = var.nat_gateway_id
 }
