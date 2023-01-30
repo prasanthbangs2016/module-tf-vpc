@@ -6,7 +6,7 @@ variable "vpc_id" {}
 
 variable "AZ" {}
 
-variable "ngw" {}
+#variable "ngw" {}
 
 #variable "igw" {}
 
