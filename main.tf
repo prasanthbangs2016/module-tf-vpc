@@ -127,7 +127,7 @@ resource "aws_nat_gateway" "ngw" {
   }
 #
 #
-#}
+}
 #
 #resource "aws_vpc_peering_connection" "peering-to-default-vpc" {
 #  peer_vpc_id   = aws_vpc.main.id
