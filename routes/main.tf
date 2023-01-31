@@ -29,13 +29,12 @@ resource "aws_route" "public" {
   gateway_id             = var.gateway_id
 }
 #
-#resource "aws_route" "private" {
-#  count = var.name == var.ngw ? 1 : 0
-#  #count = var.name == "private" ? 1 : 0
-#  route_table_id = aws_route_table.route-tables.id
-#  destination_cidr_block = "0.0.0.0/0"
-#  nat_gateway_id = var.nat_gateway_id
-#}
+resource "aws_route" "private" {
+  count                  = var.ngw ? 1 : 0
+  route_table_id         = aws_route_table.route-tables.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = var.nat_gateway_id
+}
 
 
 
