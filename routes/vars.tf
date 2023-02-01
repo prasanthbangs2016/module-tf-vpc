@@ -8,3 +8,6 @@ variable "nat_gateway_id" {}
 variable "gateway_id" {}
 variable "ngw" {}
 variable "igw" {}
+variable "default_vpc_cidr" {}
+
+variable "vpc_peering_connection_id" {}

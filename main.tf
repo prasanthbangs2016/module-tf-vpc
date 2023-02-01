@@ -31,6 +31,8 @@ module "routes" {
   nat_gateway_id = aws_nat_gateway.ngw.id
   ngw      = try(each.value["ngw"], false)
   igw      = try(each.value["igw"], false)
+  default_vpc_cidr = var.default_vpc_cidr
+  vpc_peering_connection_id =aws_vpc_peering_connection.peering-to-default-vpc.id
 
 }
 
@@ -127,20 +129,12 @@ resource "aws_nat_gateway" "ngw" {
 #
 }
 #
-#resource "aws_vpc_peering_connection" "peering-to-default-vpc" {
-#  peer_vpc_id   = aws_vpc.main.id
-#  vpc_id        = var.default_vpc_id
-#  auto_accept = true
-#
-#  tags = {
-#    Name = "Roboshop-${var.env}-to-default-aws-vpc"
-#  }
-#}
+resource "aws_vpc_peering_connection" "peering-to-default-vpc" {
+  peer_vpc_id   = aws_vpc.main.id
+  vpc_id        = var.default_vpc_id
+  auto_accept = true
 
-#resource "aws_route" "peering" {
-#  count   = length(aws_route_table.route-tables[*].id)
-#  route_table_id = element(aws_route_table.route-tables[*].id, count.index)
-#  destination_cidr_block = var.default_vpc_cidr
-#  vpc_peering_connection_id = aws_vpc_peering_connection.peering-to-default-vpc.id
-#
-#}
+  tags = {
+    Name = "Roboshop-${var.env}-to-default-aws-vpc"
+  }
+}
