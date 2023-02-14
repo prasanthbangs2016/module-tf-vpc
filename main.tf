@@ -1,7 +1,7 @@
 resource "aws_vpc" "main" {
   cidr_block           = var.cidr_block
-
-
+  enable_dns_support = true
+  enable_dns_hostnames = true
   tags = {
     Name = "Roboshop-${var.env}-vpc"
   }
@@ -144,4 +144,10 @@ resource "aws_route" "peering-route-on-default-route-table" {
   route_table_id = var.default_route_table_id
   destination_cidr_block = var.cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.peering-to-default-vpc.id
+}
+
+##add route53
+resource "aws_route53_zone_association" "zone" {
+  zone_id = data.aws_route53_zone.private.zone_id
+  vpc_id  = aws_vpc.main.id
 }
